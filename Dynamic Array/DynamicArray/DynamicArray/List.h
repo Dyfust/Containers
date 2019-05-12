@@ -110,10 +110,9 @@ public:
 		for (size_t i = 0; i < length; i++)
 		{
 			m_data[(m_count - 1) - i] = m_data[(m_count - 2) - i];
-
-			if (i == 0)
-				m_data[i] = obj;
 		}
+
+		m_data[index] = obj;
 	}
 
 	/*!

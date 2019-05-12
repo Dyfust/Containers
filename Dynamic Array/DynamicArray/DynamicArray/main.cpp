@@ -2,23 +2,20 @@
 
 int main()
 {
-	List<int>* ages = new List<int>(10);
+	List<int>* ages = new List<int>(5);
 
-	List<int>* ids = new List<int>(20);
-
-	for (size_t i = 0; i < 10; i++)
+	for (size_t i = 0; i < 5; i++)
 	{
 		ages->Push(i);
 	}
 
-	for (size_t i = 0; i < 20; i++)
-	{
-		ids->Push(i);
-	}
+	int age = 1500;
+	int age1 = 2000;
+	int age2 = 3000;
 
-	*ages = *ids;
-
-	ids->Push(21);
+	ages->AddAtIndex(age, 0);
+	ages->AddAtIndex(age1, 0);
+	ages->AddAtIndex(age2, 0);
 
 	return 0;
 }
