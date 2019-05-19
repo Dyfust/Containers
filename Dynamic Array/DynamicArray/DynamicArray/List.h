@@ -5,6 +5,7 @@ class List
 private:
 	T* m_data = nullptr;
 	int m_capacity = 10;
+	int m_initial_capacity = 10;
 	int m_count = 0;
 
 	void Expand()
@@ -57,7 +58,8 @@ public:
 
 	List(int a_default_capacity)
 	{
-		m_capacity = a_default_capacity;
+		m_initial_capacity = a_default_capacity;
+		m_capacity = m_initial_capacity;
 		m_count = 0;
 
 		m_data = new T[m_capacity];
@@ -109,7 +111,7 @@ public:
 
 		for (size_t i = 0; i < length; i++)
 		{
-			m_data[(m_count - 1) - i] = m_data[(m_count - 2) - i];
+			m_data[m_count - 1 - i] = m_data[m_count - 2 - i];
 		}
 
 		m_data[index] = obj;
@@ -139,5 +141,37 @@ public:
 	const int get_count() const
 	{
 		return m_count;
+	}
+	
+	// Deallocate excess allocated memory from this dynamic array.
+	void trim()
+	{
+		if (m_capacity > m_count)
+		{
+			m_capacity = m_count;
+
+			T* new_data = new T[m_capacity];
+
+			for (size_t index = 0; index < m_count; index++)
+			{
+				new_data[index] = m_data[index];
+			}
+
+			delete[] m_data;
+
+			m_data = new_data;
+			new_data = nullptr;
+		}
+	}
+
+	// Clear the data & reset the dynamic array to it's default state.
+	void clear()
+	{
+		m_capacity = m_initial_capacity;
+
+		delete[] m_data;
+		m_data = new T[m_capacity];
+
+		m_count = 0;
 	}
 };
