@@ -1,21 +1,23 @@
 #include "List.h"
+#include "crtdbg.h"
+#include <ctime>
+#include <iostream>
 
 int main()
 {
-	List<int>* ages = new List<int>(5);
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	srand(time(0));	
 
-	for (size_t i = 0; i < 5; i++)
+	List<int> items = List<int>();
+
+	for (size_t index = 0; index < 10; index++)
 	{
-		ages->Push(i);
+		items.Push(rand());
 	}
 
-	int age = 1500;
-	int age1 = 2000;
-	int age2 = 3000;
+	items.sort();
 
-	ages->AddAtIndex(age, 0);
-	ages->AddAtIndex(age1, 0);
-	ages->AddAtIndex(age2, 0);
+	items.RemoveAtIndex(0);
 
 	return 0;
 }
